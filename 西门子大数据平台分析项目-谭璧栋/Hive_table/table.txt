@@ -1,0 +1,516 @@
+createtab_stmt
+CREATE EXTERNAL TABLE `actual_amount_paid`(
+  `member_name` string, 
+  `actual_amount` double, 
+  `orderstate` string)
+ROW FORMAT SERDE 
+  'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe' 
+WITH SERDEPROPERTIES ( 
+  'field.delim'=',', 
+  'serialization.format'=',') 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION
+  'hdfs://virhost01:9000/user/hive/warehouse/actual_amount_paid'
+TBLPROPERTIES (
+  'COLUMN_STATS_ACCURATE'='true', 
+  'numFiles'='1', 
+  'numRows'='3068', 
+  'rawDataSize'='98905', 
+  'totalSize'='101973', 
+  'transient_lastDdlTime'='1574160602')
+createtab_stmt
+CREATE EXTERNAL TABLE `member_information`(
+  `member_name` string, 
+  `alipay_account_number` string, 
+  `name_of_consignee` string, 
+  `shipping_address` string, 
+  `contact_phone_number` string, 
+  `contact_phone` string)
+ROW FORMAT SERDE 
+  'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe' 
+WITH SERDEPROPERTIES ( 
+  'field.delim'=',', 
+  'serialization.format'=',') 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION
+  'hdfs://virhost01:9000/user/hive/warehouse/member_information'
+TBLPROPERTIES (
+  'COLUMN_STATS_ACCURATE'='true', 
+  'numFiles'='1', 
+  'numRows'='20283', 
+  'rawDataSize'='2835873', 
+  'totalSize'='2856156', 
+  'transient_lastDdlTime'='1574160465')
+createtab_stmt
+CREATE EXTERNAL TABLE `member_money`(
+  `member_name` string, 
+  `actual_amount` double, 
+  `buyers_refund` double)
+ROW FORMAT SERDE 
+  'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe' 
+WITH SERDEPROPERTIES ( 
+  'field.delim'=',', 
+  'serialization.format'=',') 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION
+  'hdfs://virhost01:9000/user/hive/warehouse/member_money'
+TBLPROPERTIES (
+  'COLUMN_STATS_ACCURATE'='true', 
+  'numFiles'='1', 
+  'numRows'='3176', 
+  'rawDataSize'='74304', 
+  'totalSize'='77480', 
+  'transient_lastDdlTime'='1574160718')
+createtab_stmt
+CREATE EXTERNAL TABLE `membership_list`(
+  `member_name` string, 
+  `user_rankphp` string)
+ROW FORMAT SERDE 
+  'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe' 
+WITH SERDEPROPERTIES ( 
+  'field.delim'=',', 
+  'serialization.format'=',') 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION
+  'hdfs://virhost01:9000/user/hive/warehouse/membership_list'
+TBLPROPERTIES (
+  'COLUMN_STATS_ACCURATE'='true', 
+  'numFiles'='1', 
+  'numRows'='2982', 
+  'rawDataSize'='75140', 
+  'totalSize'='78122', 
+  'transient_lastDdlTime'='1574160978')
+createtab_stmt
+CREATE EXTERNAL TABLE `points`(
+  `member_name` string, 
+  `member_points` double)
+ROW FORMAT SERDE 
+  'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe' 
+WITH SERDEPROPERTIES ( 
+  'field.delim'=',', 
+  'serialization.format'=',') 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION
+  'hdfs://virhost01:9000/user/hive/warehouse/points'
+TBLPROPERTIES (
+  'COLUMN_STATS_ACCURATE'='true', 
+  'numFiles'='1', 
+  'numRows'='3040', 
+  'rawDataSize'='64469', 
+  'totalSize'='67509', 
+  'transient_lastDdlTime'='1574160920')
+createtab_stmt
+CREATE EXTERNAL TABLE `points_del`(
+  `member_name` string, 
+  `sel_points` double)
+ROW FORMAT SERDE 
+  'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe' 
+WITH SERDEPROPERTIES ( 
+  'field.delim'=',', 
+  'serialization.format'=',') 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION
+  'hdfs://virhost01:9000/user/hive/warehouse/points_del'
+TBLPROPERTIES (
+  'COLUMN_STATS_ACCURATE'='true', 
+  'numFiles'='1', 
+  'numRows'='205', 
+  'rawDataSize'='4536', 
+  'totalSize'='4741', 
+  'transient_lastDdlTime'='1574160825')
+createtab_stmt
+CREATE EXTERNAL TABLE `points_sum`(
+  `member_name` string, 
+  `sum_points` double)
+ROW FORMAT SERDE 
+  'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe' 
+WITH SERDEPROPERTIES ( 
+  'field.delim'=',', 
+  'serialization.format'=',') 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION
+  'hdfs://virhost01:9000/user/hive/warehouse/points_sum'
+TBLPROPERTIES (
+  'COLUMN_STATS_ACCURATE'='true', 
+  'numFiles'='1', 
+  'numRows'='3148', 
+  'rawDataSize'='66934', 
+  'totalSize'='70082', 
+  'transient_lastDdlTime'='1574160775')
+createtab_stmt
+CREATE EXTERNAL TABLE `ref_info`(
+  `refund_number` string, 
+  `buyer_alipay` string, 
+  `order_payment_time` string, 
+  `baby_title` string, 
+  `refund_period` string, 
+  `member_name` string, 
+  `buyers_refund` double, 
+  `refund_application_time` string, 
+  `end_time` string, 
+  `reasons_refund` string, 
+  `refund_instructions` string)
+ROW FORMAT SERDE 
+  'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe' 
+WITH SERDEPROPERTIES ( 
+  'field.delim'=',', 
+  'serialization.format'=',') 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION
+  'hdfs://virhost01:9000/user/hive/warehouse/ref_info'
+TBLPROPERTIES (
+  'COLUMN_STATS_ACCURATE'='true', 
+  'numFiles'='1', 
+  'numRows'='2995', 
+  'rawDataSize'='706485', 
+  'totalSize'='709480', 
+  'transient_lastDdlTime'='1574161028')
+createtab_stmt
+CREATE EXTERNAL TABLE `refund_amount`(
+  `member_name` string, 
+  `refund_status` string, 
+  `buyers_refund` double)
+ROW FORMAT SERDE 
+  'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe' 
+WITH SERDEPROPERTIES ( 
+  'field.delim'=',', 
+  'serialization.format'=',') 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION
+  'hdfs://virhost01:9000/user/hive/warehouse/refund_amount'
+TBLPROPERTIES (
+  'COLUMN_STATS_ACCURATE'='true', 
+  'numFiles'='1', 
+  'numRows'='2871', 
+  'rawDataSize'='87742', 
+  'totalSize'='90613', 
+  'transient_lastDdlTime'='1574160652')
+createtab_stmt
+CREATE EXTERNAL TABLE `tm_itemlist`(
+  `订单编号` string COMMENT 'from deserializer', 
+  `标题` string COMMENT 'from deserializer', 
+  `价格` string COMMENT 'from deserializer', 
+  `购买数量` string COMMENT 'from deserializer', 
+  `外部系统编号` string COMMENT 'from deserializer', 
+  `商品属性` string COMMENT 'from deserializer', 
+  `套餐信息` string COMMENT 'from deserializer', 
+  `备注` string COMMENT 'from deserializer', 
+  `订单状态` string COMMENT 'from deserializer', 
+  `商家编码` string COMMENT 'from deserializer')
+ROW FORMAT SERDE 
+  'org.apache.hadoop.hive.serde2.OpenCSVSerde' 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION
+  'hdfs://virhost01:9000/user/hive/project/ltemList'
+TBLPROPERTIES (
+  'COLUMN_STATS_ACCURATE'='false', 
+  'numFiles'='0', 
+  'numRows'='-1', 
+  'rawDataSize'='-1', 
+  'skip.header.line.count'='1', 
+  'totalSize'='0', 
+  'transient_lastDdlTime'='1574160178')
+createtab_stmt
+CREATE EXTERNAL TABLE `tm_orderlist`(
+  `订单编号` string COMMENT 'from deserializer', 
+  `买家会员名` string COMMENT 'from deserializer', 
+  `买家支付宝账号` string COMMENT 'from deserializer', 
+  `买家应付货款` string COMMENT 'from deserializer', 
+  `买家应付邮费` string COMMENT 'from deserializer', 
+  `买家支付积分` string COMMENT 'from deserializer', 
+  `总金额` string COMMENT 'from deserializer', 
+  `返点积分` string COMMENT 'from deserializer', 
+  `买家实际支付金额` string COMMENT 'from deserializer', 
+  `买家实际支付积分` string COMMENT 'from deserializer', 
+  `订单状态` string COMMENT 'from deserializer', 
+  `买家留言` string COMMENT 'from deserializer', 
+  `收货人姓名` string COMMENT 'from deserializer', 
+  `收货地址` string COMMENT 'from deserializer', 
+  `运送方式` string COMMENT 'from deserializer', 
+  `联系电话` string COMMENT 'from deserializer', 
+  `联系手机` string COMMENT 'from deserializer', 
+  `订单创建时间` string COMMENT 'from deserializer', 
+  `订单付款时间` string COMMENT 'from deserializer', 
+  `宝贝标题` string COMMENT 'from deserializer', 
+  `宝贝种类` string COMMENT 'from deserializer', 
+  `物流单号` string COMMENT 'from deserializer', 
+  `物流公司` string COMMENT 'from deserializer', 
+  `订单备注` string COMMENT 'from deserializer', 
+  `宝贝总数量` string COMMENT 'from deserializer', 
+  `店铺id` string COMMENT 'from deserializer', 
+  `店铺名称` string COMMENT 'from deserializer', 
+  `订单关闭原因` string COMMENT 'from deserializer', 
+  `卖家服务费` string COMMENT 'from deserializer', 
+  `买家服务费` string COMMENT 'from deserializer', 
+  `发票抬头` string COMMENT 'from deserializer', 
+  `是否手机订单` string COMMENT 'from deserializer', 
+  `分阶段订单信息` string COMMENT 'from deserializer', 
+  `特权订金订单id` string COMMENT 'from deserializer', 
+  `是否上传合同照片` string COMMENT 'from deserializer', 
+  `是否上传小票` string COMMENT 'from deserializer', 
+  `是否代付` string COMMENT 'from deserializer', 
+  `定金排名` string COMMENT 'from deserializer', 
+  `修改后的sku` string COMMENT 'from deserializer', 
+  `修改后的收货地址` string COMMENT 'from deserializer', 
+  `异常信息` string COMMENT 'from deserializer', 
+  `天猫卡券抵扣` string COMMENT 'from deserializer', 
+  `集分宝抵扣` string COMMENT 'from deserializer', 
+  `是否是o2o交易` string COMMENT 'from deserializer', 
+  `o2o交易类型` string COMMENT 'from deserializer', 
+  `o2o店铺id` string COMMENT 'from deserializer', 
+  `o2o店铺名称` string COMMENT 'from deserializer', 
+  `o2o导购员id` string COMMENT 'from deserializer', 
+  `o2o导购员姓名` string COMMENT 'from deserializer', 
+  `o2o提货类型` string COMMENT 'from deserializer', 
+  `o2o外部订单id` string COMMENT 'from deserializer', 
+  `退款金额` string COMMENT 'from deserializer', 
+  `预约门店` string COMMENT 'from deserializer', 
+  `是否村淘订单` string COMMENT 'from deserializer', 
+  `确认收货时间` string COMMENT 'from deserializer', 
+  `打款商家金额` string COMMENT 'from deserializer', 
+  `含应开票给个人的个人红包` string COMMENT 'from deserializer')
+ROW FORMAT SERDE 
+  'org.apache.hadoop.hive.serde2.OpenCSVSerde' 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION
+  'hdfs://virhost01:9000/user/hive/project/orderList'
+TBLPROPERTIES (
+  'COLUMN_STATS_ACCURATE'='false', 
+  'numFiles'='0', 
+  'numRows'='-1', 
+  'rawDataSize'='-1', 
+  'skip.header.line.count'='1', 
+  'totalSize'='0', 
+  'transient_lastDdlTime'='1574160179')
+createtab_stmt
+CREATE EXTERNAL TABLE `tm_return`(
+  `订单编号` string COMMENT 'from deserializer', 
+  `退款编号` string COMMENT 'from deserializer', 
+  `支付宝交易号` string COMMENT 'from deserializer', 
+  `订单付款时间` string COMMENT 'from deserializer', 
+  `商品编码` string COMMENT 'from deserializer', 
+  `退款完结时间` string COMMENT 'from deserializer', 
+  `买家会员名称` string COMMENT 'from deserializer', 
+  `买家实际支付金额` string COMMENT 'from deserializer', 
+  `宝贝标题` string COMMENT 'from deserializer', 
+  `买家退款金额` string COMMENT 'from deserializer', 
+  `手工退款_系统退款` string COMMENT 'from deserializer', 
+  `是否需要退货` string COMMENT 'from deserializer', 
+  `退款的申请时间` string COMMENT 'from deserializer', 
+  `超时时间` string COMMENT 'from deserializer', 
+  `退款状态` string COMMENT 'from deserializer', 
+  `货物状态` string COMMENT 'from deserializer', 
+  `退货物流信息` string COMMENT 'from deserializer', 
+  `发货物流信息` string COMMENT 'from deserializer', 
+  `客服介入状态` string COMMENT 'from deserializer', 
+  `卖家真实姓名` string COMMENT 'from deserializer', 
+  `卖家退货地址` string COMMENT 'from deserializer', 
+  `卖家邮编` string COMMENT 'from deserializer', 
+  `卖家电话` string COMMENT 'from deserializer', 
+  `卖家手机` string COMMENT 'from deserializer', 
+  `退货物流单号` string COMMENT 'from deserializer', 
+  `退货物流公司` string COMMENT 'from deserializer', 
+  `买家退款原因` string COMMENT 'from deserializer', 
+  `买家退款说明` string COMMENT 'from deserializer', 
+  `买家退货时间` string COMMENT 'from deserializer', 
+  `责任方` string COMMENT 'from deserializer', 
+  `售中或售后` string COMMENT 'from deserializer', 
+  `商家备注` string COMMENT 'from deserializer', 
+  `完结时间` string COMMENT 'from deserializer', 
+  `部分退款_全部退款` string COMMENT 'from deserializer', 
+  `审核操作人` string COMMENT 'from deserializer', 
+  `举证超时` string COMMENT 'from deserializer', 
+  `是否零秒响应` string COMMENT 'from deserializer', 
+  `退款操作人` string COMMENT 'from deserializer')
+ROW FORMAT SERDE 
+  'org.apache.hadoop.hive.serde2.OpenCSVSerde' 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION
+  'hdfs://virhost01:9000/user/hive/project/return'
+TBLPROPERTIES (
+  'COLUMN_STATS_ACCURATE'='false', 
+  'numFiles'='0', 
+  'numRows'='-1', 
+  'rawDataSize'='-1', 
+  'skip.header.line.count'='1', 
+  'totalSize'='0', 
+  'transient_lastDdlTime'='1574160179')
+createtab_stmt
+CREATE EXTERNAL TABLE `trade_info`(
+  `orderid` string, 
+  `title` string, 
+  `conding` string, 
+  `num` double, 
+  `price` double, 
+  `orderstate` string, 
+  `sys_num` string, 
+  `member_name` string)
+ROW FORMAT SERDE 
+  'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe' 
+WITH SERDEPROPERTIES ( 
+  'field.delim'=',', 
+  'serialization.format'=',') 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION
+  'hdfs://virhost01:9000/user/hive/warehouse/trade_info'
+TBLPROPERTIES (
+  'COLUMN_STATS_ACCURATE'='true', 
+  'numFiles'='1', 
+  'numRows'='29848', 
+  'rawDataSize'='4878594', 
+  'totalSize'='4908442', 
+  'transient_lastDdlTime'='1574161110')
+createtab_stmt
+CREATE EXTERNAL TABLE `trade_information`(
+  `orderid` string, 
+  `amount` double, 
+  `actual_amount` double, 
+  `orderstate` string, 
+  `order_creation_time` string, 
+  `order_payment_time` string, 
+  `baby_title` string, 
+  `types_of_baby` string, 
+  `storeid` string, 
+  `shop_name` string, 
+  `confirm_receipt_time` string, 
+  `member_name` string, 
+  `total_refund` double)
+ROW FORMAT SERDE 
+  'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe' 
+WITH SERDEPROPERTIES ( 
+  'field.delim'=',', 
+  'serialization.format'=',') 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION
+  'hdfs://virhost01:9000/user/hive/warehouse/trade_information'
+TBLPROPERTIES (
+  'COLUMN_STATS_ACCURATE'='true', 
+  'numFiles'='1', 
+  'numRows'='29604', 
+  'rawDataSize'='6688379', 
+  'totalSize'='6717983', 
+  'transient_lastDdlTime'='1574160292')
+createtab_stmt
+CREATE EXTERNAL TABLE `transaction_detail`(
+  `orderid` string, 
+  `title` string, 
+  `price` double, 
+  `num` double, 
+  `external_system_number` string, 
+  `specs` string, 
+  `package_information` string, 
+  `remark` string, 
+  `orderstate` string, 
+  `coding` string)
+ROW FORMAT SERDE 
+  'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe' 
+WITH SERDEPROPERTIES ( 
+  'field.delim'=',', 
+  'serialization.format'=',') 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION
+  'hdfs://virhost01:9000/user/hive/warehouse/transaction_detail'
+TBLPROPERTIES (
+  'COLUMN_STATS_ACCURATE'='true', 
+  'numFiles'='1', 
+  'numRows'='29848', 
+  'rawDataSize'='5050600', 
+  'totalSize'='5080448', 
+  'transient_lastDdlTime'='1574160359')
+createtab_stmt
+CREATE EXTERNAL TABLE `use_info`(
+  `member_name` string, 
+  `name` string, 
+  `contact_phone` string, 
+  `amount` double, 
+  `total_refund` double, 
+  `credits` double, 
+  `user_rankphp` string)
+ROW FORMAT SERDE 
+  'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe' 
+WITH SERDEPROPERTIES ( 
+  'field.delim'=',', 
+  'serialization.format'=',') 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION
+  'hdfs://virhost01:9000/user/hive/warehouse/use_info'
+TBLPROPERTIES (
+  'COLUMN_STATS_ACCURATE'='true', 
+  'numFiles'='1', 
+  'numRows'='20632', 
+  'rawDataSize'='1068350', 
+  'totalSize'='1088982', 
+  'transient_lastDdlTime'='1574161405')
+createtab_stmt
+CREATE EXTERNAL TABLE `use_ls`(
+  `买家会员名` string, 
+  `联系手机` string, 
+  `买家实际支付金额` double, 
+  `收货人姓名` string, 
+  `退款金额` double)
+ROW FORMAT SERDE 
+  'org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe' 
+WITH SERDEPROPERTIES ( 
+  'field.delim'=',', 
+  'serialization.format'=',') 
+STORED AS INPUTFORMAT 
+  'org.apache.hadoop.mapred.TextInputFormat' 
+OUTPUTFORMAT 
+  'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+LOCATION
+  'hdfs://virhost01:9000/user/hive/warehouse/use_ls'
+TBLPROPERTIES (
+  'COLUMN_STATS_ACCURATE'='true', 
+  'numFiles'='1', 
+  'numRows'='20283', 
+  'rawDataSize'='878014', 
+  'totalSize'='898297', 
+  'transient_lastDdlTime'='1574160548')

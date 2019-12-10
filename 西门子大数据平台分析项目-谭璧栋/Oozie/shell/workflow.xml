@@ -1,0 +1,97 @@
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<workflow-app xmlns="uri:oozie:workflow:0.4" name="shell-Siemens">
+    <start to="shell-node"/>
+    <action name="shell-node">
+        <shell xmlns="uri:oozie:shell-action:0.2">
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+            <configuration>
+                <property>
+                    <name>mapred.job.queue.name</name>
+                    <value>${queueName}</value>
+                </property>
+            </configuration>
+          <exec>${exec}</exec>
+	<file>${nameNode}/${oozieTestRoot}/shell/${exec}#${exec}</file>
+	<file>${nameNode}/${oozieTestRoot}/shell/${exec_sql}#${exec_sql}</file>
+            <capture-output/>
+        </shell>
+        <ok to="sqoop-node"/>
+        <error to="fail"/>
+    </action>
+	
+	 <action name="sqoop-node">
+        <sqoop xmlns="uri:oozie:sqoop-action:0.2">
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+            <configuration>
+                <property>
+                    <name>mapred.job.queue.name</name>
+                    <value>${queueName}</value>
+                </property>
+            </configuration>
+            <command>export --connect "jdbc:mysql://virhost01:3306/My_TM_Project?useUnicode=true&amp;characterEncoding=utf-8" --username root --password 123456 --table My_Info_User --fields-terminated-by "," --input-null-string "\\N"  --input-null-non-string "\\N" --export-dir /user/hive/my_project/BaoBiao/Rf_Info_User --num-mappers 1</command>
+        </sqoop>
+        <ok to="sqoop-node2"/>
+        <error to="faill"/>
+    </action>
+
+
+	 <action name="sqoop-node2">
+        <sqoop xmlns="uri:oozie:sqoop-action:0.2">
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+            <configuration>
+                <property>
+                    <name>mapred.job.queue.name</name>
+                    <value>${queueName}</value>
+                </property>
+            </configuration>
+            <command>export --connect "jdbc:mysql://virhost01:3306/My_TM_Project?useUnicode=true&amp;characterEncoding=utf-8" --username root --password 123456 --table My_Info_Order --fields-terminated-by "," --input-null-string "\\N"  --input-null-non-string "\\N" --export-dir /user/hive/my_project/BaoBiao/Rf_Info_Order --num-mappers 1</command>
+        </sqoop>
+        <ok to="sqoop-node3"/>
+        <error to="faill"/>
+    </action>
+	
+
+	 <action name="sqoop-node3">
+        <sqoop xmlns="uri:oozie:sqoop-action:0.2">
+            <job-tracker>${jobTracker}</job-tracker>
+            <name-node>${nameNode}</name-node>
+            <configuration>
+                <property>
+                    <name>mapred.job.queue.name</name>
+                    <value>${queueName}</value>
+                </property>
+            </configuration>
+            <command>export --connect "jdbc:mysql://virhost01:3306/My_TM_Project?useUnicode=true&amp;characterEncoding=utf-8" --username root --password 123456 --table My_Info_Refund --fields-terminated-by "," --input-null-string "\\N"  --input-null-non-string "\\N" --export-dir /user/hive/my_project/BaoBiao/Rf_Info_Refund --num-mappers 1</command>
+        </sqoop>
+        <ok to="end"/>
+        <error to="faill"/>
+    </action>
+
+   
+    <kill name="fail">
+        <message>Shell action failed, error message[${wf:errorMessage(wf:lastErrorNode())}]</message>
+    </kill>
+	<kill name="faill">
+        <message>Sqoop failed, error message[${wf:errorMessage(wf:lastErrorNode())}]</message>
+    </kill>
+	   <end name="end"/>
+</workflow-app>

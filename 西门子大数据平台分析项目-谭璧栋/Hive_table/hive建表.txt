@@ -1,0 +1,242 @@
+create  external table if not exists default.TM_ItemList(
+`订单编号` string,
+`标题` string,
+`价格` Double,
+`购买数量` Double,
+`外部系统编号` string,
+`商品属性` string,
+`套餐信息` string,
+`备注` string,
+`订单状态` string,
+`商家编码` string
+)partitioned by (day string)
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+location'/user/hive/my_project/TM_ItemList'
+tblproperties("skip.header.line.count"="1");
+
+
+create  external table if not exists default.TM_OrderList(
+`订单编号` string,
+`买家会员名` string,
+`买家支付宝账号` string,
+`买家应付货款` Double,
+`买家应付邮费` Double,
+`买家支付积分` Double,
+`总金额` Double,
+`返点积分` Double,
+`买家实际支付金额` Double,
+`买家实际支付积分` Double,
+`订单状态` string,
+`买家留言` string,
+`收货人姓名` string,
+`收货地址` string,
+`运送方式` string,
+`联系电话` string,
+`联系手机` string,
+`订单创建时间` string,
+`订单付款时间` string,
+`宝贝标题` string,
+`宝贝种类` string,
+`物流单号` string,
+`物流公司` string,
+`订单备注` string,
+`宝贝总数量` string,
+`店铺Id` string,
+`店铺名称` string,
+`订单关闭原因` string,
+`卖家服务费` string,
+`买家服务费` string,
+`发票抬头` string,
+`是否手机订单` string,
+`分阶段订单信息` string,
+`特权订金订单id` string,
+`是否上传合同照片` string,
+`是否上传小票` string,
+`是否代付` string,
+`定金排名` string,
+`修改后的sku` string,
+`修改后的收货地址` string,
+`异常信息` string,
+`天猫卡券抵扣` Double,
+`集分宝抵扣` Double,
+`是否是O2O交易` string,
+`O2O交易类型` string,
+`O2O店铺id` string,
+`O2O店铺名称` string,
+`O2O导购员id` string,
+`O2O导购员姓名` string,
+`O2O提货类型` string,
+`O2O外部订单id` string,
+`退款金额` Double,
+`预约门店` string,
+`是否村淘订单` string,
+`确认收货时间` string,
+`打款商家金额` Double,
+`含应开票给个人的个人红包` Double
+)partitioned by (day string)
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+location'/user/hive/my_project/TM_OrderList'
+tblproperties("skip.header.line.count"="1");
+
+
+create  external table if not exists default.TM_Return(
+`订单编号` string,
+`退款编号` string,
+`支付宝交易号` string,
+`订单付款时间` string,
+`商品编码` string,
+`退款完结时间` string,
+`买家会员名称` string,
+`买家实际支付金额` Double,
+`宝贝标题` string,
+`买家退款金额` Double,
+`手工退款_系统退款` Double,
+`是否需要退货` string,
+`退款的申请时间` string,
+`超时时间` string,
+`退款状态` string,
+`货物状态` string,
+`退货物流信息` string,
+`发货物流信息` string,
+`客服介入状态` string,
+`卖家真实姓名` string,
+`卖家退货地址` string,
+`卖家邮编` string,
+`卖家电话` string,
+`卖家手机` string,
+`退货物流单号` string,
+`退货物流公司` string,
+`买家退款原因` string,
+`买家退款说明` string,
+`买家退货时间` string,
+`责任方` string,
+`售中或售后` string,
+`商家备注` string,
+`完结时间` string,
+`部分退款_全部退款` Double,
+`审核操作人` string,
+`举证超时` string,
+`是否零秒响应` string,
+`退款操作人` string
+)
+partitioned by (day string)
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
+location'/user/hive/my_project/TM_Return'
+tblproperties("skip.header.line.count"="1");
+
+
+create  external table if not exists default.Info_Member(
+Member_Name string,
+Alipay_Account_Number string,
+Name_Of_Consignee string,
+Address string,
+Contact_Phone_Number string,
+Contact_Phone string
+)row format delimited fields terminated by ','
+location'/user/hive/my_project/LSB/Info_Member';
+
+
+create  external table if not exists default.Info_Order(
+OrderID string,
+Amount Double,
+Actual_Amount  Double,
+OrderState string,
+Order_Creation_Time string,
+Order_payment_Time string,
+Baby_Title string,
+Types_Of_Baby string,
+StoreId string,
+Shop_Name string,
+Confirm_Receipt_time string,
+Member_Name string
+)row format delimited fields terminated by ','
+location'/user/hive/my_project/LSB/Info_Order';
+
+create  external table if not exists default.JYJELSB(
+Member_Name string,
+OrderID string,
+Actual_Amount double
+)row format delimited fields terminated by ','
+location'/user/hive/my_project/LSB/JYJELSB';
+
+create  external table if not exists default.TKJELSB(
+Member_Name string,
+Refund_Number string,
+Refund_Amount double,
+OrderID string
+)row format delimited fields terminated by ','
+location'/user/hive/my_project/LSB/TKJELSB';
+
+create  external table if not exists default.MAITUILSB(
+Member_Name string,
+OrderID string,
+Money double
+)row format delimited fields terminated by ','
+location'/user/hive/my_project/LSB/MAITUILSB';
+
+
+create  external table if not exists default.Member_Deal(
+Member_Name string,
+Integral double
+)row format delimited fields terminated by ','
+location'/user/hive/my_project/LSB/Member_Deal';
+
+create  external table if not exists default.Member_Points(
+Member_Name string,
+Member_Points double
+)row format delimited fields terminated by ','
+location'/user/hive/my_project/LSB/Member_Points';
+
+create  external table if not exists default.Member_Grade(
+Member_Name string,
+Member_Grade string
+)row format delimited fields terminated by ','
+location'/user/hive/my_project/LSB/Member_Grade';
+
+create  external table if not exists default.All_TK(
+Member_Name string,
+Refund_Amount double
+)row format delimited fields terminated by ','
+location'/user/hive/my_project/LSB/All_TK';
+
+create  external table if not exists default.All_FK(
+Member_Name string,
+Amount_Trade double
+)row format delimited fields terminated by ','
+location'/user/hive/my_project/LSB/All_FK';
+
+create  external table if not exists default.Rf_Info_User(
+Member_Name string,
+Contact_Phone string,
+Member_Points double,
+Member_Grade string,
+Amount_Trade double,
+Refund_Amount double
+)row format delimited fields terminated by ','
+location'/user/hive/my_project/BaoBiao/Rf_Info_User';
+
+create  external table if not exists default.Rf_Info_Order(
+Member_Name string,
+OrderID string,
+Baby_Title string,
+StoreId string,
+Price double,
+Buy_Quantity string,
+OrderState string
+)row format delimited fields terminated by ','
+location'/user/hive/my_project/BaoBiao/Rf_Info_Order';
+
+create  external table if not exists default.Rf_Info_Refund(
+Member_Name string,
+Refund_Number string,
+OrderID string,
+Baby_Title string,
+Refund_Time string,
+Refund_Period string,
+Actual_Amount double,
+Buyer_Refund double,
+Refund_Status string,
+Reasons_Refund string
+)row format delimited fields terminated by ','
+location'/user/hive/my_project/BaoBiao/Rf_Info_Refund'; 
+
